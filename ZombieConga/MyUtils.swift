@@ -77,3 +77,19 @@ extension CGPoint {
     return self / length
   }
 }
+
+let tao = CGFloat.pi * 2
+
+func shortestAngleBetween(startAngle: CGFloat,
+                          endAngle: CGFloat) -> CGFloat {
+  var angle = (endAngle - startAngle).truncatingRemainder(dividingBy: tao)
+  if angle >= tao / 2 { angle -= tao }
+  if angle <= -tao / 2 { angle += tao }
+  return angle
+}
+
+extension CGFloat {
+  var sign: CGFloat {
+    return self >= 0.0 ? 1.0 : -1.0
+  }
+}
