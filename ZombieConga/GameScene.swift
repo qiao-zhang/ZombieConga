@@ -44,6 +44,16 @@ class GameScene: SKScene {
     return blinkAction
   }()
   
+  var catMovePointsPerSec: CGFloat {
+    return zombieMovePointsPerSec
+  }
+  let catTurningGreenAction: SKAction = {
+    let duration = 0.2
+    let action = SKAction.colorize(with: UIColor.green,
+                                   colorBlendFactor: 1,
+                                   duration: duration)
+    return action
+  }()
   let catCollisionSound: SKAction = SKAction.playSoundFileNamed(
       "hitCat.wav", waitForCompletion: false)
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed(
@@ -79,6 +89,7 @@ class GameScene: SKScene {
     
     // add the zombie
     zombie.position = CGPoint(x: 400, y: 400)
+    zombie.zPosition = 100
     addChild(zombie)
 //    zombie.run(SKAction.repeatForever(zombieAnimation))
     
@@ -108,6 +119,7 @@ class GameScene: SKScene {
     lastUpdateTime = currentTime
 
     updateZombie()
+    moveTrain()
 //    checkCollisions()
   }
   
@@ -271,7 +283,11 @@ class GameScene: SKScene {
   }
   
   private func zombieHit(cat: SKSpriteNode) {
-    cat.removeFromParent()
+    cat.name = "train"
+    cat.removeAllActions()
+    cat.setScale(1)
+    cat.zRotation = 0
+    cat.run(catTurningGreenAction)
     run(catCollisionSound)
   }
   
@@ -282,18 +298,19 @@ class GameScene: SKScene {
   }
   
   private func checkCollisions() {
-    var hitCats: [SKSpriteNode] = []
-    enumerateChildNodes(withName: "cat") { node, _ in
+//    var hitCats: [SKSpriteNode] = []
+    enumerateChildNodes(withName: "cat") { [weak self] node, _ in
+      guard let strongSelf = self else { return }
       let cat = node as! SKSpriteNode
-      if cat.frame.intersects(self.zombie.frame) {
-        hitCats.append(cat)
+      if cat.frame.intersects(strongSelf.zombie.frame) {
+        strongSelf.zombieHit(cat: cat)
       }
     }
-    for cat in hitCats { zombieHit(cat: cat) }
+//    for cat in hitCats { zombieHit(cat: cat) }
     
     guard !zombieInvincible else { return }
     
-    var hitEnemies: [SKSpriteNode] = []
+//    var hitEnemies: [SKSpriteNode] = []
     enumerateChildNodes(withName: "enemy") { [weak self] node, _ in
       guard let strongSelf = self else { return }
       let enemy = node as! SKSpriteNode
@@ -303,5 +320,23 @@ class GameScene: SKScene {
       }
     }
 //    for enemy in hitEnemies { zombieHit(enemy: enemy) }
+  }
+  
+  private func moveTrain() {
+    var targetPosition = zombie.position
+    
+    enumerateChildNodes(withName: "train") { [weak self] node, stop in
+      guard let strongSelf = self else { return }
+      if !node.hasActions() {
+        let offset = targetPosition - node.position
+        let distance = offset.length
+        let actionDuration = TimeInterval(
+            distance / strongSelf.catMovePointsPerSec)
+        let moveAction = SKAction.move(to: targetPosition,
+                                       duration: actionDuration)
+        node.run(moveAction)
+      }
+      targetPosition = node.position
+    }
   }
 }
