@@ -12,14 +12,38 @@ import UIKit
 class GameScene: SKScene {
   
   let playableRect: CGRect
-  let zombie = SKSpriteNode(imageNamed: "zombie1")
   var lastUpdateTime: TimeInterval = 0
   var dt: TimeInterval = 0
+  var lastTouchLocation: CGPoint? = nil
+  
+  let zombie = SKSpriteNode(imageNamed: "zombie1")
   let zombieMovePointsPerSec: CGFloat = 480.0
   let zombieRotateRadiansPerSec: CGFloat = tao * 2.0
   var zombieMovingDirection = CGPoint.zero
-  var lastTouchLocation: CGPoint? = nil
   let zombieAnimation: SKAction
+  var zombieInvincible = false {
+    didSet {
+      if zombieInvincible {
+        zombie.run(zombieBlinkAction) { [weak self] in
+          self?.zombieInvincible = false
+        }
+      } else {
+        zombie.isHidden = false
+      }
+    }
+  }
+  let zombieBlinkAction: SKAction = {
+    let blinkTimes = 10.0
+    let duration = 3.0
+    let slice = duration / blinkTimes
+    let blinkAction = SKAction.customAction(withDuration: duration) {
+      node, elapsedTime in
+      let remainder = Double(elapsedTime).truncatingRemainder(dividingBy: slice) 
+      node.isHidden = (remainder > slice / 2)
+    }
+    return blinkAction
+  }()
+  
   let catCollisionSound: SKAction = SKAction.playSoundFileNamed(
       "hitCat.wav", waitForCompletion: false)
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed(
@@ -252,8 +276,9 @@ class GameScene: SKScene {
   }
   
   private func zombieHit(enemy: SKSpriteNode) {
-    enemy.removeFromParent()
+//    enemy.removeFromParent()
     run(enemyCollisionSound)
+    zombieInvincible = true
   }
   
   private func checkCollisions() {
@@ -266,13 +291,17 @@ class GameScene: SKScene {
     }
     for cat in hitCats { zombieHit(cat: cat) }
     
+    guard !zombieInvincible else { return }
+    
     var hitEnemies: [SKSpriteNode] = []
-    enumerateChildNodes(withName: "enemy") { node, _ in
+    enumerateChildNodes(withName: "enemy") { [weak self] node, _ in
+      guard let strongSelf = self else { return }
       let enemy = node as! SKSpriteNode
-      if node.frame.insetBy(dx: 20, dy: 20).intersects(self.zombie.frame) {
-        hitEnemies.append(enemy)
+      if node.frame.insetBy(dx: 20, dy: 20).intersects(strongSelf.zombie.frame) {
+        strongSelf.zombieHit(enemy: enemy)
+//        hitEnemies.append(enemy)
       }
     }
-    for enemy in hitEnemies { zombieHit(enemy: enemy) }
+//    for enemy in hitEnemies { zombieHit(enemy: enemy) }
   }
 }
