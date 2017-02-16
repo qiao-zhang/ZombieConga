@@ -19,11 +19,19 @@
 		E739F9C31E55E684002AEBF1 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = E739F9BE1E55E684002AEBF1 /* hitCatLady.wav */; };
 		E739F9C41E55E684002AEBF1 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E739F9BF1E55E684002AEBF1 /* lose.wav */; };
 		E739F9C51E55E684002AEBF1 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = E739F9C01E55E684002AEBF1 /* win.wav */; };
+		E739F9CD1E55E8E1002AEBF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739F9CC1E55E8E1002AEBF1 /* AppDelegate.swift */; };
+		E739F9D31E55E8E1002AEBF1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739F9D21E55E8E1002AEBF1 /* GameScene.swift */; };
+		E739F9D51E55E8E1002AEBF1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739F9D41E55E8E1002AEBF1 /* GameViewController.swift */; };
+		E739F9D81E55E8E1002AEBF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E739F9D61E55E8E1002AEBF1 /* Main.storyboard */; };
+		E739F9DA1E55E8E1002AEBF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E739F9D91E55E8E1002AEBF1 /* Assets.xcassets */; };
+		E739F9DD1E55E8E1002AEBF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E739F9DB1E55E8E1002AEBF1 /* LaunchScreen.storyboard */; };
+		E739F9E31E55E950002AEBF1 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739F9E21E55E950002AEBF1 /* MyUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD1EB16843CA4C146D74086B /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		DD1EB30FE2A128B31F24F7BB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		DD1EB4BDE09865BAEC65D7A1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		E726F5761E4F74FC0029FD6D /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726F5791E4F74FC0029FD6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E726F5811E4F74FC0029FD6D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -36,10 +44,26 @@
 		E739F9BE1E55E684002AEBF1 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
 		E739F9BF1E55E684002AEBF1 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		E739F9C01E55E684002AEBF1 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		E739F9CA1E55E8E1002AEBF1 /* ActionsCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActionsCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E739F9CC1E55E8E1002AEBF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E739F9D21E55E8E1002AEBF1 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		E739F9D41E55E8E1002AEBF1 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E739F9D71E55E8E1002AEBF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E739F9D91E55E8E1002AEBF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E739F9DC1E55E8E1002AEBF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E739F9DE1E55E8E1002AEBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E739F9E21E55E950002AEBF1 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E726F5731E4F74FB0029FD6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E739F9C71E55E8E1002AEBF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,7 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				E726F5781E4F74FC0029FD6D /* ZombieConga */,
+				E739F9CB1E55E8E1002AEBF1 /* ActionsCatalog */,
 				E726F5771E4F74FC0029FD6D /* Products */,
+				DD1EB4BDE09865BAEC65D7A1 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				E726F5761E4F74FC0029FD6D /* ZombieConga.app */,
+				E739F9CA1E55E8E1002AEBF1 /* ActionsCatalog.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +120,21 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		E739F9CB1E55E8E1002AEBF1 /* ActionsCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				E739F9E21E55E950002AEBF1 /* MyUtils.swift */,
+				E739F9CC1E55E8E1002AEBF1 /* AppDelegate.swift */,
+				E739F9D21E55E8E1002AEBF1 /* GameScene.swift */,
+				E739F9D41E55E8E1002AEBF1 /* GameViewController.swift */,
+				E739F9D61E55E8E1002AEBF1 /* Main.storyboard */,
+				E739F9D91E55E8E1002AEBF1 /* Assets.xcassets */,
+				E739F9DB1E55E8E1002AEBF1 /* LaunchScreen.storyboard */,
+				E739F9DE1E55E8E1002AEBF1 /* Info.plist */,
+			);
+			path = ActionsCatalog;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +155,23 @@
 			productReference = E726F5761E4F74FC0029FD6D /* ZombieConga.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E739F9C91E55E8E1002AEBF1 /* ActionsCatalog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E739F9DF1E55E8E1002AEBF1 /* Build configuration list for PBXNativeTarget "ActionsCatalog" */;
+			buildPhases = (
+				E739F9C61E55E8E1002AEBF1 /* Sources */,
+				E739F9C71E55E8E1002AEBF1 /* Frameworks */,
+				E739F9C81E55E8E1002AEBF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ActionsCatalog;
+			productName = ActionsCatalog;
+			productReference = E739F9CA1E55E8E1002AEBF1 /* ActionsCatalog.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -124,6 +183,11 @@
 				ORGANIZATIONNAME = "Qiao Zhang";
 				TargetAttributes = {
 					E726F5751E4F74FB0029FD6D = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 5H9H3DSGAL;
+						ProvisioningStyle = Automatic;
+					};
+					E739F9C91E55E8E1002AEBF1 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 5H9H3DSGAL;
 						ProvisioningStyle = Automatic;
@@ -144,6 +208,7 @@
 			projectRoot = "";
 			targets = (
 				E726F5751E4F74FB0029FD6D /* ZombieConga */,
+				E739F9C91E55E8E1002AEBF1 /* ActionsCatalog */,
 			);
 		};
 /* End PBXProject section */
@@ -164,6 +229,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E739F9C81E55E8E1002AEBF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E739F9D81E55E8E1002AEBF1 /* Main.storyboard in Resources */,
+				E739F9DA1E55E8E1002AEBF1 /* Assets.xcassets in Resources */,
+				E739F9DD1E55E8E1002AEBF1 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -175,6 +250,17 @@
 				E726F57A1E4F74FC0029FD6D /* AppDelegate.swift in Sources */,
 				DD1EBB7539BE1477C432C9F2 /* GameScene.swift in Sources */,
 				DD1EBE7F9394059F37F843BC /* MyUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E739F9C61E55E8E1002AEBF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E739F9D31E55E8E1002AEBF1 /* GameScene.swift in Sources */,
+				E739F9D51E55E8E1002AEBF1 /* GameViewController.swift in Sources */,
+				E739F9CD1E55E8E1002AEBF1 /* AppDelegate.swift in Sources */,
+				E739F9E31E55E950002AEBF1 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +279,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				E726F5891E4F74FC0029FD6D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E739F9D61E55E8E1002AEBF1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E739F9D71E55E8E1002AEBF1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E739F9DB1E55E8E1002AEBF1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E739F9DC1E55E8E1002AEBF1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -319,6 +421,32 @@
 			};
 			name = Release;
 		};
+		E739F9E01E55E8E1002AEBF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5H9H3DSGAL;
+				INFOPLIST_FILE = ActionsCatalog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = www.qiaozhang.ActionsCatalog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E739F9E11E55E8E1002AEBF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5H9H3DSGAL;
+				INFOPLIST_FILE = ActionsCatalog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = www.qiaozhang.ActionsCatalog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +467,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E739F9DF1E55E8E1002AEBF1 /* Build configuration list for PBXNativeTarget "ActionsCatalog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E739F9E01E55E8E1002AEBF1 /* Debug */,
+				E739F9E11E55E8E1002AEBF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
