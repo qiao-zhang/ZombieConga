@@ -15,7 +15,9 @@ class GameScene: SKScene {
   var lastUpdateTime: TimeInterval = 0
   var dt: TimeInterval = 0
   var lastTouchLocation: CGPoint? = nil
-  
+  var gameOver = false
+
+  var lives = 5
   let zombie = SKSpriteNode(imageNamed: "zombie1")
   let zombieMovePointsPerSec: CGFloat = 480.0
   let zombieRotateRadiansPerSec: CGFloat = tao * 2.0
@@ -121,6 +123,10 @@ class GameScene: SKScene {
     updateZombie()
     moveTrain()
 //    checkCollisions()
+    if lives <= 0 && !gameOver {
+      gameOver = true
+      print("You lose!")
+    }
   }
   
   override func didEvaluateActions() {
@@ -294,6 +300,8 @@ class GameScene: SKScene {
   private func zombieHit(enemy: SKSpriteNode) {
 //    enemy.removeFromParent()
     run(enemyCollisionSound)
+    loseCats()
+    lives -= 1
     zombieInvincible = true
   }
   
@@ -323,10 +331,12 @@ class GameScene: SKScene {
   }
   
   private func moveTrain() {
+    var trainCount = 0
     var targetPosition = zombie.position
     
     enumerateChildNodes(withName: "train") { [weak self] node, stop in
       guard let strongSelf = self else { return }
+      trainCount += 1
       if !node.hasActions() {
         let offset = targetPosition - node.position
         let distance = offset.length
@@ -337,6 +347,35 @@ class GameScene: SKScene {
         node.run(moveAction)
       }
       targetPosition = node.position
+    }
+    
+    if trainCount >= 15 && !gameOver {
+      gameOver = true
+      print("You win!")
+    }
+  }
+  
+  private func loseCats() {
+    var loseCount = 0
+    enumerateChildNodes(withName: "train") { node, stop in
+      var randomSpot = node.position
+      
+      randomSpot.x += CGFloat.random(min: -100, max: 100)
+      randomSpot.y += CGFloat.random(min: -100, max: 100)
+      
+      node.name = ""
+      node.run(
+          SKAction.sequence([
+            SKAction.group([
+              SKAction.rotate(byAngle: tao*2, duration: 1.0),
+              SKAction.move(to: randomSpot, duration: 1.0),
+              SKAction.scale(to: 0, duration: 1.0)]),
+            SKAction.removeFromParent()]))
+      
+      loseCount += 1
+      if loseCount >= 2 {
+        stop[0] = true
+      }
     }
   }
 }
