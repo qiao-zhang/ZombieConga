@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD1EBB7539BE1477C432C9F2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB30FE2A128B31F24F7BB /* GameScene.swift */; };
+		DD1EB28924831C612C2CD2B6 /* GameOverScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB580B83E0283C28DDA9E /* GameOverScenePresenter.swift */; };
+		DD1EB2FC18510F18B2F4A6FA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBAD69CF0F53B5F96C19C /* Router.swift */; };
+		DD1EB3D278F80F58E0DBA69B /* GameOverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB52C93D46771B447D048 /* GameOverInteractor.swift */; };
+		DD1EB4B50F2C787E846DE7BB /* GameScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBD562C1302F1BF66D790 /* GameScenePresenter.swift */; };
+		DD1EB6551A6355C9D6E88E10 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB4E3D1561E5F29392A39 /* GameScene.swift */; };
+		DD1EBA2A27FAFD8090986204 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB5080602F0E6866C8A43 /* GameOverScene.swift */; };
 		DD1EBE7F9394059F37F843BC /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB16843CA4C146D74086B /* MyUtils.swift */; };
+		DD1EBE7FB14EB51EE0639758 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB9B8E6A6AC7A88E447CE /* Game.swift */; };
 		E726F57A1E4F74FC0029FD6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726F5791E4F74FC0029FD6D /* AppDelegate.swift */; };
 		E726F5821E4F74FC0029FD6D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726F5811E4F74FC0029FD6D /* GameViewController.swift */; };
 		E726F5851E4F74FC0029FD6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E726F5831E4F74FC0029FD6D /* Main.storyboard */; };
@@ -30,8 +36,14 @@
 
 /* Begin PBXFileReference section */
 		DD1EB16843CA4C146D74086B /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
-		DD1EB30FE2A128B31F24F7BB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		DD1EB4BDE09865BAEC65D7A1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
+		DD1EB4E3D1561E5F29392A39 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		DD1EB5080602F0E6866C8A43 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		DD1EB52C93D46771B447D048 /* GameOverInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverInteractor.swift; sourceTree = "<group>"; };
+		DD1EB580B83E0283C28DDA9E /* GameOverScenePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScenePresenter.swift; sourceTree = "<group>"; };
+		DD1EB9B8E6A6AC7A88E447CE /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		DD1EBAD69CF0F53B5F96C19C /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DD1EBD562C1302F1BF66D790 /* GameScenePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScenePresenter.swift; sourceTree = "<group>"; };
 		E726F5761E4F74FC0029FD6D /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726F5791E4F74FC0029FD6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E726F5811E4F74FC0029FD6D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +85,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1EBFD9950A0D565E9ABE2C /* GameModule */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB4E3D1561E5F29392A39 /* GameScene.swift */,
+				DD1EBD562C1302F1BF66D790 /* GameScenePresenter.swift */,
+				DD1EB9B8E6A6AC7A88E447CE /* Game.swift */,
+			);
+			path = GameModule;
+			sourceTree = "<group>";
+		};
+		DD1EBFE4BC430F7DC6457F85 /* GameOverSceneModule */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB5080602F0E6866C8A43 /* GameOverScene.swift */,
+				DD1EB580B83E0283C28DDA9E /* GameOverScenePresenter.swift */,
+				DD1EB52C93D46771B447D048 /* GameOverInteractor.swift */,
+			);
+			path = GameOverSceneModule;
+			sourceTree = "<group>";
+		};
 		E726F56D1E4F74FB0029FD6D = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +134,10 @@
 				E726F5861E4F74FC0029FD6D /* Assets.xcassets */,
 				E726F5881E4F74FC0029FD6D /* LaunchScreen.storyboard */,
 				E726F58B1E4F74FC0029FD6D /* Info.plist */,
-				DD1EB30FE2A128B31F24F7BB /* GameScene.swift */,
 				DD1EB16843CA4C146D74086B /* MyUtils.swift */,
+				DD1EBFE4BC430F7DC6457F85 /* GameOverSceneModule */,
+				DD1EBFD9950A0D565E9ABE2C /* GameModule */,
+				DD1EBAD69CF0F53B5F96C19C /* Router.swift */,
 			);
 			path = ZombieConga;
 			sourceTree = "<group>";
@@ -248,8 +282,14 @@
 			files = (
 				E726F5821E4F74FC0029FD6D /* GameViewController.swift in Sources */,
 				E726F57A1E4F74FC0029FD6D /* AppDelegate.swift in Sources */,
-				DD1EBB7539BE1477C432C9F2 /* GameScene.swift in Sources */,
 				DD1EBE7F9394059F37F843BC /* MyUtils.swift in Sources */,
+				DD1EBA2A27FAFD8090986204 /* GameOverScene.swift in Sources */,
+				DD1EB28924831C612C2CD2B6 /* GameOverScenePresenter.swift in Sources */,
+				DD1EB6551A6355C9D6E88E10 /* GameScene.swift in Sources */,
+				DD1EB2FC18510F18B2F4A6FA /* Router.swift in Sources */,
+				DD1EB4B50F2C787E846DE7BB /* GameScenePresenter.swift in Sources */,
+				DD1EB3D278F80F58E0DBA69B /* GameOverInteractor.swift in Sources */,
+				DD1EBE7FB14EB51EE0639758 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

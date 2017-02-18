@@ -9,56 +9,56 @@
 import SpriteKit
 import UIKit
 
-class GameScene: SKScene {
+protocol GameSceneOutput {
+  func zombieSpriteDidHitEnemySprite()
+  func zombieSpriteDidHitCatSprite()
+  func checkGameState()
+}
+
+protocol GameSceneInput: class {
+  func zombieSpriteStartsBlinking()
+  func zombieSpriteStopsBlinking()
+  func gameOver(wonOrNot: Bool)
+}
+
+class GameScene: SKScene, GameSceneInput {
+  
+  var output: GameSceneOutput?
   
   let playableRect: CGRect
   var lastUpdateTime: TimeInterval = 0
   var dt: TimeInterval = 0
   var lastTouchLocation: CGPoint? = nil
-  var gameOver = false
 
-  var lives = 5
-  let zombie = SKSpriteNode(imageNamed: "zombie1")
-  let zombieMovePointsPerSec: CGFloat = 480.0
-  let zombieRotateRadiansPerSec: CGFloat = tao * 2.0
-  var zombieMovingDirection = CGPoint.zero
-  let zombieAnimation: SKAction
-  var zombieInvincible = false {
-    didSet {
-      if zombieInvincible {
-        zombie.run(zombieBlinkAction) { [weak self] in
-          self?.zombieInvincible = false
-        }
-      } else {
-        zombie.isHidden = false
-      }
-    }
-  }
-  let zombieBlinkAction: SKAction = {
-    let blinkTimes = 10.0
-    let duration = 3.0
-    let slice = duration / blinkTimes
-    let blinkAction = SKAction.customAction(withDuration: duration) {
-      node, elapsedTime in
-      let remainder = Double(elapsedTime).truncatingRemainder(dividingBy: slice) 
-      node.isHidden = (remainder > slice / 2)
-    }
-    return blinkAction
-  }()
+  let zombieSprite = SKSpriteNode(imageNamed: "zombie1")
+  let zombieSpriteMovePointsPerSec: CGFloat = 480.0
+  let zombieSpriteRotateRadiansPerSec: CGFloat = tao * 2.0
+  var zombieSpriteMovingDirection = CGPoint.zero
+  let zombieSpriteWalkingAnimation: SKAction
   
-  var catMovePointsPerSec: CGFloat {
-    return zombieMovePointsPerSec
+  let zombieSpriteBlinkAction: SKAction = {
+    let oneBlinkDuration: TimeInterval = 0.3
+    let oneBlink = SKAction.customAction(withDuration: oneBlinkDuration) {
+      node, elapsedTime in
+      node.isHidden = (elapsedTime > CGFloat(oneBlinkDuration / 2))
+    }
+    return SKAction.repeatForever(oneBlink)
+  }()
+
+  var catSpriteMovePointsPerSec: CGFloat {
+    return zombieSpriteMovePointsPerSec
   }
-  let catTurningGreenAction: SKAction = {
+  let catSpriteTurningGreenAction: SKAction = {
     let duration = 0.2
     let action = SKAction.colorize(with: UIColor.green,
                                    colorBlendFactor: 1,
                                    duration: duration)
     return action
   }()
-  let catCollisionSound: SKAction = SKAction.playSoundFileNamed(
+  
+  let catSpriteCollisionSound: SKAction = SKAction.playSoundFileNamed(
       "hitCat.wav", waitForCompletion: false)
-  let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed(
+  let enemySpriteCollisionSound: SKAction = SKAction.playSoundFileNamed(
       "hitCatLady.wav", waitForCompletion: false)
 
   override init(size: CGSize) {
@@ -73,7 +73,7 @@ class GameScene: SKScene {
     }
     textures.append(textures[2])
     textures.append(textures[1])
-    zombieAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
+    zombieSpriteWalkingAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
     super.init(size: size)
   }
   
@@ -82,29 +82,28 @@ class GameScene: SKScene {
   }
 
   override func didMove(to view: SKView) {
-//    super.didMove(to: view)
+    // add background
     backgroundColor = SKColor.black
     let background = SKSpriteNode(imageNamed: "background1")
     background.position = CGPoint(x: size.width/2, y: size.height/2)
     background.zPosition = -1
     addChild(background)
     
-    // add the zombie
-    zombie.position = CGPoint(x: 400, y: 400)
-    zombie.zPosition = 100
-    addChild(zombie)
-//    zombie.run(SKAction.repeatForever(zombieAnimation))
+    // add zombie sprite
+    zombieSprite.position = CGPoint(x: 400, y: 400)
+    zombieSprite.zPosition = 100
+    addChild(zombieSprite)
     
-    // spawn enemies
+    // spawn enemy sprites
     run(SKAction.repeatForever(SKAction.sequence([
         SKAction.run { [weak self] in
-        self?.spawnEnemy()
+        self?.spawnEnemySprite()
         },
         SKAction.wait(forDuration: 2.0)
     ])))
     run(SKAction.repeatForever(SKAction.sequence([
         SKAction.run { [weak self] in
-          self?.spawnCat()
+          self?.spawnCatSprite()
         },
         SKAction.wait(forDuration: 1.0)
     ])))
@@ -122,15 +121,11 @@ class GameScene: SKScene {
 
     updateZombie()
     moveTrain()
-//    checkCollisions()
-    if lives <= 0 && !gameOver {
-      gameOver = true
-      print("You lose!")
-    }
   }
   
   override func didEvaluateActions() {
     checkCollisions()
+    output?.checkGameState()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>,
@@ -146,7 +141,21 @@ class GameScene: SKScene {
     let touchLocation = touch.location(in: self)
     sceneTouched(touchLocation: touchLocation)
   }
-  
+
+  func zombieSpriteStartsBlinking() {
+    zombieSprite.run(zombieSpriteBlinkAction, withKey: "blink")
+  }
+
+  func zombieSpriteStopsBlinking() {
+    zombieSprite.removeAction(forKey: "blink")
+    zombieSprite.isHidden = false
+  }
+
+  func gameOver(wonOrNot: Bool) {
+    print("in \(#function)")
+    Router.revealGameOverScene(from: self, wonOrNot: wonOrNot)
+  }
+
   // Helper functions
   private func move(sprite: SKSpriteNode,
                     to location: CGPoint,
@@ -175,8 +184,8 @@ class GameScene: SKScene {
   }
   
   private func updateZombie() {
-    rotate(sprite: zombie, to: zombieMovingDirection.angle,
-           radiansPerSec: zombieRotateRadiansPerSec)
+    rotate(sprite: zombieSprite, to: zombieSpriteMovingDirection.angle,
+           radiansPerSec: zombieSpriteRotateRadiansPerSec)
     if let target = lastTouchLocation {
       moveZombieToward(target)
     }
@@ -184,19 +193,19 @@ class GameScene: SKScene {
   }
   
   private func moveZombieToward(_ target: CGPoint) {
-    let distance = (target - zombie.position).length
-    let distanceCanMove = zombieMovePointsPerSec * CGFloat(dt)
+    let distance = (target - zombieSprite.position).length
+    let distanceCanMove = zombieSpriteMovePointsPerSec * CGFloat(dt)
     if distance < distanceCanMove {
-      zombie.position = target
+      zombieSprite.position = target
       stopZombieWalkingAnimation()
     } else {
-      zombie.position += zombieMovingDirection * distanceCanMove
+      zombieSprite.position += zombieSpriteMovingDirection * distanceCanMove
     }
   }
   
   private func setZombieMovingDirection(towards location: CGPoint) {
-    let offset = location - zombie.position
-    zombieMovingDirection = offset.normalized()
+    let offset = location - zombieSprite.position
+    zombieSpriteMovingDirection = offset.normalized()
   }
   
   private func sceneTouched(touchLocation: CGPoint) {
@@ -209,21 +218,21 @@ class GameScene: SKScene {
     let bottomLeft = CGPoint(x: 0, y: playableRect.minY)
     let topRight = CGPoint(x: size.width, y: playableRect.maxY)
     
-    if zombie.position.x <= bottomLeft.x {
-      zombie.position.x = bottomLeft.x
-      zombieMovingDirection.x = -zombieMovingDirection.x
+    if zombieSprite.position.x <= bottomLeft.x {
+      zombieSprite.position.x = bottomLeft.x
+      zombieSpriteMovingDirection.x = -zombieSpriteMovingDirection.x
     }
-    if zombie.position.x >= topRight.x {
-      zombie.position.x = topRight.x
-      zombieMovingDirection.x = -zombieMovingDirection.x
+    if zombieSprite.position.x >= topRight.x {
+      zombieSprite.position.x = topRight.x
+      zombieSpriteMovingDirection.x = -zombieSpriteMovingDirection.x
     }
-    if zombie.position.y <= bottomLeft.y {
-      zombie.position.y = bottomLeft.y
-      zombieMovingDirection.y = -zombieMovingDirection.y
+    if zombieSprite.position.y <= bottomLeft.y {
+      zombieSprite.position.y = bottomLeft.y
+      zombieSpriteMovingDirection.y = -zombieSpriteMovingDirection.y
     }
-    if zombie.position.y >= topRight.y {
-      zombie.position.y = topRight.y
-      zombieMovingDirection.y = -zombieMovingDirection.y
+    if zombieSprite.position.y >= topRight.y {
+      zombieSprite.position.y = topRight.y
+      zombieSpriteMovingDirection.y = -zombieSpriteMovingDirection.y
     }
   }
   
@@ -237,7 +246,7 @@ class GameScene: SKScene {
     addChild(shape)
   }
   
-  private func spawnEnemy() {
+  private func spawnEnemySprite() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
     enemy.name = "enemy"
     enemy.position = CGPoint(
@@ -252,15 +261,16 @@ class GameScene: SKScene {
   }
   
   private func startZombieWalkingAnimation() {
-    guard zombie.action(forKey: "animation") == nil else { return }
-    zombie.run(SKAction.repeatForever(zombieAnimation), withKey: "animation")
+    guard zombieSprite.action(forKey: "animation") == nil else { return }
+    zombieSprite.run(SKAction.repeatForever(zombieSpriteWalkingAnimation),
+                     withKey: "animation")
   }
   
   private func stopZombieWalkingAnimation() {
-    zombie.removeAction(forKey: "animation")
+    zombieSprite.removeAction(forKey: "animation")
   }
   
-  private func spawnCat() {
+  private func spawnCatSprite() {
     let cat = SKSpriteNode(imageNamed: "cat")
     cat.name = "cat"
     cat.position = CGPoint(x: CGFloat.random(min: playableRect.minX,
@@ -271,12 +281,10 @@ class GameScene: SKScene {
     addChild(cat)
     
     let appear = SKAction.scale(to: 1.0, duration: 0.5)
-//    let wait = SKAction.wait(forDuration: 10.0)
     cat.zRotation = -tao / 32.0
     let leftWiggle = SKAction.rotate(byAngle: tao/16.0, duration: 0.5)
     let rightWiggle = leftWiggle.reversed()
     let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
-//    let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
     let scaleUp = SKAction.scale(by: 1.2, duration: 0.25)
     let scaleDown = scaleUp.reversed()
     let fullScale = SKAction.sequence([scaleUp, scaleDown, scaleUp, scaleDown])
@@ -293,69 +301,56 @@ class GameScene: SKScene {
     cat.removeAllActions()
     cat.setScale(1)
     cat.zRotation = 0
-    cat.run(catTurningGreenAction)
-    run(catCollisionSound)
+    cat.run(catSpriteTurningGreenAction)
+    run(catSpriteCollisionSound)
+    output?.zombieSpriteDidHitCatSprite()
   }
-  
+
   private func zombieHit(enemy: SKSpriteNode) {
-//    enemy.removeFromParent()
-    run(enemyCollisionSound)
-    loseCats()
-    lives -= 1
-    zombieInvincible = true
+    run(enemySpriteCollisionSound)
+    removeCatSprites(howMany: 2)
+    output?.zombieSpriteDidHitEnemySprite()
   }
   
   private func checkCollisions() {
-//    var hitCats: [SKSpriteNode] = []
     enumerateChildNodes(withName: "cat") { [weak self] node, _ in
       guard let strongSelf = self else { return }
       let cat = node as! SKSpriteNode
-      if cat.frame.intersects(strongSelf.zombie.frame) {
+      if cat.frame.intersects(strongSelf.zombieSprite.frame) {
         strongSelf.zombieHit(cat: cat)
       }
     }
-//    for cat in hitCats { zombieHit(cat: cat) }
     
-    guard !zombieInvincible else { return }
-    
-//    var hitEnemies: [SKSpriteNode] = []
     enumerateChildNodes(withName: "enemy") { [weak self] node, _ in
       guard let strongSelf = self else { return }
+      if let _ = strongSelf.zombieSprite.action(forKey: "blink") { return }
       let enemy = node as! SKSpriteNode
-      if node.frame.insetBy(dx: 20, dy: 20).intersects(strongSelf.zombie.frame) {
+      if node.frame.insetBy(dx: 20, dy: 20)
+                   .intersects(strongSelf.zombieSprite.frame) {
         strongSelf.zombieHit(enemy: enemy)
-//        hitEnemies.append(enemy)
       }
     }
-//    for enemy in hitEnemies { zombieHit(enemy: enemy) }
   }
   
   private func moveTrain() {
-    var trainCount = 0
-    var targetPosition = zombie.position
+    var targetPosition = zombieSprite.position
     
     enumerateChildNodes(withName: "train") { [weak self] node, stop in
       guard let strongSelf = self else { return }
-      trainCount += 1
       if !node.hasActions() {
         let offset = targetPosition - node.position
         let distance = offset.length
         let actionDuration = TimeInterval(
-            distance / strongSelf.catMovePointsPerSec)
+            distance / strongSelf.catSpriteMovePointsPerSec)
         let moveAction = SKAction.move(to: targetPosition,
                                        duration: actionDuration)
         node.run(moveAction)
       }
       targetPosition = node.position
     }
-    
-    if trainCount >= 15 && !gameOver {
-      gameOver = true
-      print("You win!")
-    }
   }
   
-  private func loseCats() {
+  private func removeCatSprites(howMany num: Int) {
     var loseCount = 0
     enumerateChildNodes(withName: "train") { node, stop in
       var randomSpot = node.position
@@ -373,7 +368,7 @@ class GameScene: SKScene {
             SKAction.removeFromParent()]))
       
       loseCount += 1
-      if loseCount >= 2 {
+      if loseCount >= num {
         stop[0] = true
       }
     }
