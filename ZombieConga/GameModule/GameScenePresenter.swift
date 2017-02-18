@@ -8,12 +8,12 @@ import Foundation
 class GameScenePresenter: GameSceneOutput, GameUIOutput {
   unowned let gameScene: GameScene
   let game: Game
-  
+
   init(gameScene: GameScene, game: Game) {
     self.gameScene = gameScene
     self.game = game
   }
-  
+
   func zombieBecameInvincible() {
     gameScene.zombieSpriteStartsBlinking()
   }
@@ -33,22 +33,15 @@ class GameScenePresenter: GameSceneOutput, GameUIOutput {
   func checkGameState() {
     switch game.state {
     case .won:
-      gameScene.gameOver(wonOrNot: true)
+      gameScene.wrapUp(wonOrNot: true)
     case .lost:
-      gameScene.gameOver(wonOrNot: false)
+      gameScene.wrapUp(wonOrNot: false)
     default:
       break
     }
   }
 
-//if lives <= 0 && !gameOver {
-//  gameOver = true
-//  print("You lose!")
-//  let gameOverScene = GameOverScene(size: size)
-//  gameOverScene.scaleMode = scaleMode
-//
-//  let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//
-//  view?.presentScene(gameOverScene, transition: reveal)
-//}
+  func didWrapUp(wonOrNot: Bool) {
+    Router.revealGameOverScene(from: gameScene, wonOrNot: wonOrNot)
+  }
 }

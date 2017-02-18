@@ -13,12 +13,13 @@ protocol GameSceneOutput {
   func zombieSpriteDidHitEnemySprite()
   func zombieSpriteDidHitCatSprite()
   func checkGameState()
+  func didWrapUp(wonOrNot: Bool)
 }
 
 protocol GameSceneInput: class {
   func zombieSpriteStartsBlinking()
   func zombieSpriteStopsBlinking()
-  func gameOver(wonOrNot: Bool)
+  func wrapUp(wonOrNot: Bool)
 }
 
 class GameScene: SKScene, GameSceneInput {
@@ -82,6 +83,9 @@ class GameScene: SKScene, GameSceneInput {
   }
 
   override func didMove(to view: SKView) {
+    // play BGM
+    playBackgroundMusic(filename: "backgroundMusic.mp3")
+    
     // add background
     backgroundColor = SKColor.black
     let background = SKSpriteNode(imageNamed: "background1")
@@ -151,9 +155,9 @@ class GameScene: SKScene, GameSceneInput {
     zombieSprite.isHidden = false
   }
 
-  func gameOver(wonOrNot: Bool) {
-    print("in \(#function)")
-    Router.revealGameOverScene(from: self, wonOrNot: wonOrNot)
+  func wrapUp(wonOrNot: Bool) {
+    backgroundMusicPlayer.stop()
+    output?.didWrapUp(wonOrNot: wonOrNot)
   }
 
   // Helper functions
