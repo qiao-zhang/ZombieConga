@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  GameSceneImp.swift
 //  ZombieConga
 //
 //  Created by Qiao Zhang on 2/11/17.
@@ -16,13 +16,14 @@ protocol GameSceneOutput {
   func didWrapUp(wonOrNot: Bool)
 }
 
-protocol GameSceneInput: class {
+protocol GameScene: class, MyScene {
+  var output: GameSceneOutput? { get set }
   func zombieSpriteStartsBlinking()
   func zombieSpriteStopsBlinking()
   func wrapUp(wonOrNot: Bool)
 }
 
-class GameScene: SKScene, GameSceneInput {
+class GameSceneImp: SKScene, GameScene {
   
   var output: GameSceneOutput?
   

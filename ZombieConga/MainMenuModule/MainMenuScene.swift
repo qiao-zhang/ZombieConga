@@ -9,16 +9,15 @@ protocol MainMenuSceneOutput {
   func mainMenuSceneTapped()
 }
 
-protocol MainMenuScene: class {
-  var scene: SKScene { get }
+protocol MainMenuScene: class, MyScene {
   var output: MainMenuSceneOutput? { get set}
 }
 
 class MainMenuSceneImp: SKScene, MainMenuScene {
   var output: MainMenuSceneOutput?
-  override var scene: SKScene {
-    return self as SKScene
-  }
+//  override var myScene: SKScene {
+//    return self as SKScene
+//  }
 
   override func didMove(to view: SKView) {
     super.didMove(to: view)

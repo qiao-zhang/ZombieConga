@@ -10,7 +10,7 @@ protocol GameOverSceneOutput {
   func gameOverSceneDidDisplayResult(_ scene: GameOverScene)
 }
 
-protocol GameOverSceneInput: class {
+protocol GameOverSceneInput: class, MyScene {
   func displayResult(_ wonOrNot: Bool)
 }
 
