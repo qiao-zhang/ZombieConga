@@ -12,11 +12,11 @@ import SpriteKit
 class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    let scene = Router.createGameSceneWhenAppStarts()
     let skView = self.view as! SKView
     skView.showsFPS = true
     skView.showsNodeCount = true
     skView.ignoresSiblingOrder = true
+    let scene = Router.initialScene
     scene.scaleMode = .aspectFill
     skView.presentScene(scene)
   }
