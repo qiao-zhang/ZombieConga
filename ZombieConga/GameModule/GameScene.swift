@@ -73,7 +73,7 @@ class GameSceneImp: SKScene, GameScene {
       "hitCatLady.wav", waitForCompletion: false)
   
   // labels
-  let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
+  let livesLabel = SKLabelNode(fontNamed: "Glimstick")
 
   override init(size: CGSize) {
     let maxWidthHeightRatio: CGFloat = 16.0 / 9.0

@@ -42,6 +42,7 @@
 		E7652C581E5A203600015B6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7652C561E5A203600015B6C /* Main.storyboard */; };
 		E7652C5A1E5A203600015B6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7652C591E5A203600015B6C /* Assets.xcassets */; };
 		E7652C5D1E5A203600015B6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7652C5B1E5A203600015B6C /* LaunchScreen.storyboard */; };
+		E7652C631E5A53BE00015B6C /* GLIMSTIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E7652C621E5A53BE00015B6C /* GLIMSTIC.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		E7652C591E5A203600015B6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7652C5C1E5A203600015B6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7652C5E1E5A203600015B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7652C621E5A53BE00015B6C /* GLIMSTIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GLIMSTIC.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		E726F5781E4F74FC0029FD6D /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				E7652C621E5A53BE00015B6C /* GLIMSTIC.TTF */,
 				E739F9BB1E55E684002AEBF1 /* Sounds */,
 				E726F5791E4F74FC0029FD6D /* AppDelegate.swift */,
 				E726F5811E4F74FC0029FD6D /* GameViewController.swift */,
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7652C631E5A53BE00015B6C /* GLIMSTIC.TTF in Resources */,
 				E726F5851E4F74FC0029FD6D /* Main.storyboard in Resources */,
 				E739F9C51E55E684002AEBF1 /* win.wav in Resources */,
 				E739F9C21E55E684002AEBF1 /* hitCat.wav in Resources */,
