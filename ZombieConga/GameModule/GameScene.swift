@@ -97,6 +97,11 @@ class GameSceneImp: SKScene, GameScene {
     // play BGM
     playBackgroundMusic(filename: "backgroundMusic.mp3")
 
+    // add camera
+    cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+    addChild(cameraNode)
+    camera = cameraNode 
+
     // add background
     backgroundColor = SKColor.black
     for i in 0...1 {
@@ -123,22 +128,17 @@ class GameSceneImp: SKScene, GameScene {
       SKAction.run { self.spawnCatSprite() }, 
       SKAction.wait(forDuration: 1.0)
     ])))
-
-    // add camera
-    cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
-    camera = cameraNode 
     
     // add labels
     livesLabel.text = "Lives: X"
     livesLabel.fontColor = SKColor.black
     livesLabel.fontSize = 100
     livesLabel.zPosition = 100
-//    livesLabel.zPosition = 1500
     livesLabel.horizontalAlignmentMode = .left
     livesLabel.verticalAlignmentMode = .bottom
-//    livesLabel.position = CGPoint.zero
-    livesLabel.position = cameraRect.origin + CGPoint(x: 20, y: 20)
-    addChild(livesLabel)
+    livesLabel.position = CGPoint(x: -playableRectSize.width/2 + 20,
+                                  y: -playableRectSize.height/2 + 20)
+    cameraNode.addChild(livesLabel)
   }
 
   override func update(_ currentTime: TimeInterval) {
@@ -429,7 +429,6 @@ class GameSceneImp: SKScene, GameScene {
     let cameraVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
     let amountToMove = cameraVelocity * CGFloat(dt)
     cameraNode.position += amountToMove
-    livesLabel.position += amountToMove
     
     enumerateChildNodes(withName: "background") { [weak self] node, _ in
       guard let strongSelf = self else { return }
