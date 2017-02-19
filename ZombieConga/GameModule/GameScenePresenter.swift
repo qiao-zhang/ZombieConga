@@ -13,23 +13,22 @@ class GameScenePresenter: GameSceneOutput, GameUIOutput {
     self.gameScene = gameScene
     self.game = game
   }
-
-  func zombieBecameInvincible() {
-    gameScene.zombieSpriteStartsBlinking()
-  }
-
-  func zombieBecameNormal() {
-    gameScene.zombieSpriteStopsBlinking()
-  }
-
+  
+  // GameSceneOutput
   func zombieSpriteDidHitEnemySprite() {
     game.zombieDidHitEnemy()
+    gameScene.setLivesLabel(to: "Lives: \(game.lives)")
   }
 
   func zombieSpriteDidHitCatSprite() {
     game.zombieDidCaptureACat()
+    gameScene.setCatsLabel(to: "Cats: \(game.cats)")
   }
-
+  
+  func didWrapUp(wonOrNot: Bool) {
+    Router.revealGameOverScene(from: gameScene, wonOrNot: wonOrNot)
+  }
+  
   func checkGameState() {
     switch game.state {
     case .won:
@@ -41,7 +40,18 @@ class GameScenePresenter: GameSceneOutput, GameUIOutput {
     }
   }
 
-  func didWrapUp(wonOrNot: Bool) {
-    Router.revealGameOverScene(from: gameScene, wonOrNot: wonOrNot)
+  func sceneDidSetUp() {
+    gameScene.setLivesLabel(to: "Lives: \(game.lives)")
+    gameScene.setCatsLabel(to: "Cats: \(game.cats)")
   }
+
+  // GameUIOutput
+  func zombieBecameInvincible() {
+    gameScene.zombieSpriteStartsBlinking()
+  }
+
+  func zombieBecameNormal() {
+    gameScene.zombieSpriteStopsBlinking()
+  }
+
 }

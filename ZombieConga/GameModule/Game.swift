@@ -12,6 +12,8 @@ protocol GameUIOutput: class {
 
 protocol Game {
   var state: GameState { get }
+  var lives: Int { get }
+  var cats: Int { get }
   func zombieDidHitEnemy()
   func zombieDidCaptureACat()
 }
@@ -26,6 +28,7 @@ class GameImp: Game {
 
   weak var uiOutput: GameUIOutput?
   var lives = 5
+  var cats = 0
   var zombieInvincible = false {
     didSet {
       if zombieInvincible {
@@ -38,7 +41,6 @@ class GameImp: Game {
       }
     }
   }
-  var capturedCatsNum = 0
   private(set) var state: GameState = .playing
 
   func zombieDidHitEnemy() {
@@ -49,12 +51,12 @@ class GameImp: Game {
   }
 
   func zombieDidCaptureACat() {
-    capturedCatsNum += 1
-    if capturedCatsNum >= 15 { state = .won}
+    cats += 1
+    if cats >= 15 { state = .won}
   }
 
   private func loseCats(by num: Int) {
-    capturedCatsNum -= num
-    if capturedCatsNum <= 0 { capturedCatsNum = 0 }
+    cats -= num
+    if cats <= 0 { cats = 0 }
   }
 }

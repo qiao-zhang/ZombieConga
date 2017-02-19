@@ -14,6 +14,7 @@ protocol GameSceneOutput {
   func zombieSpriteDidHitCatSprite()
   func checkGameState()
   func didWrapUp(wonOrNot: Bool)
+  func sceneDidSetUp()
 }
 
 protocol GameScene: MyScene {
@@ -21,6 +22,8 @@ protocol GameScene: MyScene {
   func zombieSpriteStartsBlinking()
   func zombieSpriteStopsBlinking()
   func wrapUp(wonOrNot: Bool)
+  func setLivesLabel(to text: String)
+  func setCatsLabel(to text: String)
 }
 
 class GameSceneImp: SKScene, GameScene {
@@ -74,6 +77,9 @@ class GameSceneImp: SKScene, GameScene {
   
   // labels
   let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+//  var livesLabelText = "Lives: 5"
+  let catsLabel = SKLabelNode(fontNamed: "Glimstick")
+//  var catsLabelText = "Cats: 0"
 
   override init(size: CGSize) {
     let maxWidthHeightRatio: CGFloat = 16.0 / 9.0
@@ -130,7 +136,6 @@ class GameSceneImp: SKScene, GameScene {
     ])))
     
     // add labels
-    livesLabel.text = "Lives: X"
     livesLabel.fontColor = SKColor.black
     livesLabel.fontSize = 100
     livesLabel.zPosition = 100
@@ -138,7 +143,17 @@ class GameSceneImp: SKScene, GameScene {
     livesLabel.verticalAlignmentMode = .bottom
     livesLabel.position = CGPoint(x: -playableRectSize.width/2 + 20,
                                   y: -playableRectSize.height/2 + 20)
+    catsLabel.fontColor = SKColor.black
+    catsLabel.fontSize = 100
+    catsLabel.zPosition = 100
+    catsLabel.horizontalAlignmentMode = .right
+    catsLabel.verticalAlignmentMode = .bottom
+    catsLabel.position = CGPoint(x: playableRectSize.width/2 - 20,
+                                  y: -playableRectSize.height/2 + 20)
     cameraNode.addChild(livesLabel)
+    cameraNode.addChild(catsLabel)
+    
+    output?.sceneDidSetUp()
   }
 
   override func update(_ currentTime: TimeInterval) {
@@ -152,6 +167,8 @@ class GameSceneImp: SKScene, GameScene {
     updateZombieSprite()
     moveTrain()
     moveCamera()
+//    livesLabel.text = livesLabelText
+//    catsLabel.text = catsLabelText
   }
   
   override func didEvaluateActions() {
@@ -186,6 +203,15 @@ class GameSceneImp: SKScene, GameScene {
     backgroundMusicPlayer.stop()
     output?.didWrapUp(wonOrNot: wonOrNot)
   }
+
+  func setLivesLabel(to text: String) {
+    livesLabel.text = text
+  }
+
+  func setCatsLabel(to text: String) {
+    catsLabel.text = text
+  }
+
 
   // Helper functions
   private func move(sprite: SKSpriteNode,
