@@ -27,7 +27,7 @@ class GameSceneImp: SKScene, GameScene {
   
   var output: GameSceneOutput?
   
-  let playableRect: CGRect
+  let playableRectSize: CGSize
   var lastUpdateTime: TimeInterval = 0
   var dt: TimeInterval = 0
   var lastTouchLocation: CGPoint? = nil
@@ -36,9 +36,9 @@ class GameSceneImp: SKScene, GameScene {
   let cameraMovePointsPerSec: CGFloat = 200.0
   var cameraRect: CGRect {
     return CGRect(
-      origin: CGPoint(x: camera!.position.x - playableRect.size.width/2,
-                      y: camera!.position.y - playableRect.size.height/2),
-      size: playableRect.size)
+      origin: CGPoint(x: cameraNode.position.x - playableRectSize.width/2,
+                      y: cameraNode.position.y - playableRectSize.height/2),
+      size: playableRectSize)
   }
 
   let zombieSprite = SKSpriteNode(imageNamed: "zombie1")
@@ -75,9 +75,7 @@ class GameSceneImp: SKScene, GameScene {
   override init(size: CGSize) {
     let maxWidthHeightRatio: CGFloat = 16.0 / 9.0
     let playableHeight = size.width / maxWidthHeightRatio
-    let playableMargin = (size.height - playableHeight) / 2.0
-    playableRect = CGRect(x: 0, y: playableMargin,
-                          width: size.width, height: playableHeight)
+    playableRectSize = CGSize(width: size.width, height: playableHeight)
     var textures: [SKTexture] = []
     for i in 1...4 {
       textures.append(SKTexture(imageNamed: "zombie\(i)"))
@@ -123,11 +121,8 @@ class GameSceneImp: SKScene, GameScene {
       SKAction.wait(forDuration: 1.0)
     ])))
 
-//    addChild(cameraNode)
     camera = cameraNode
-    camera!.position = CGPoint(x: size.width/2, y: size.height/2)
-    
-    debugDrawPlayableArea()
+    cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
   }
 
   override func update(_ currentTime: TimeInterval) {
@@ -263,26 +258,16 @@ class GameSceneImp: SKScene, GameScene {
     }
   }
   
-  private func debugDrawPlayableArea() {
-    let shape = SKShapeNode()
-    let path = CGMutablePath()
-    path.addRect(playableRect)
-    shape.path = path
-    shape.strokeColor = SKColor.red
-    shape.lineWidth = 4.0
-    addChild(shape)
-  }
-  
   private func spawnEnemySprite() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
     enemy.name = "enemy"
     enemy.position = CGPoint(
-        x: size.width + enemy.size.width/2,
-        y: CGFloat.random(min: playableRect.minY + enemy.size.height/2,
-                          max: playableRect.maxY - enemy.size.height/2))
+        x: cameraRect.maxX + enemy.size.width/2,
+        y: CGFloat.random(min: cameraRect.minY + enemy.size.height/2,
+                          max: cameraRect.maxY - enemy.size.height/2))
     addChild(enemy)
     
-    let actionMove = SKAction.moveTo(x: -enemy.size.width/2, duration: 2.0)
+    let actionMove = SKAction.moveBy(x: -cameraRect.width, y: 0, duration: 2.0)
     let actionRemove = SKAction.removeFromParent()
     enemy.run(SKAction.sequence([actionMove, actionRemove]))
   }
@@ -426,7 +411,7 @@ class GameSceneImp: SKScene, GameScene {
   private func moveCamera() {
     let cameraVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
     let amountToMove = cameraVelocity * CGFloat(dt)
-    camera?.position += amountToMove
+    cameraNode.position += amountToMove
     
     enumerateChildNodes(withName: "background") { [weak self] node, _ in
       guard let strongSelf = self else { return }
