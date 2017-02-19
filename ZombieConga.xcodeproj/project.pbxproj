@@ -36,6 +36,12 @@
 		E739F9DA1E55E8E1002AEBF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E739F9D91E55E8E1002AEBF1 /* Assets.xcassets */; };
 		E739F9DD1E55E8E1002AEBF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E739F9DB1E55E8E1002AEBF1 /* LaunchScreen.storyboard */; };
 		E739F9E31E55E950002AEBF1 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739F9E21E55E950002AEBF1 /* MyUtils.swift */; };
+		E7652C4D1E5A203600015B6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652C4C1E5A203600015B6C /* AppDelegate.swift */; };
+		E7652C531E5A203600015B6C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652C521E5A203600015B6C /* GameScene.swift */; };
+		E7652C551E5A203600015B6C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652C541E5A203600015B6C /* GameViewController.swift */; };
+		E7652C581E5A203600015B6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7652C561E5A203600015B6C /* Main.storyboard */; };
+		E7652C5A1E5A203600015B6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7652C591E5A203600015B6C /* Assets.xcassets */; };
+		E7652C5D1E5A203600015B6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7652C5B1E5A203600015B6C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +79,14 @@
 		E739F9DC1E55E8E1002AEBF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E739F9DE1E55E8E1002AEBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E739F9E21E55E950002AEBF1 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		E7652C4A1E5A203600015B6C /* AvailableFonts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvailableFonts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7652C4C1E5A203600015B6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E7652C521E5A203600015B6C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		E7652C541E5A203600015B6C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E7652C571E5A203600015B6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E7652C591E5A203600015B6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7652C5C1E5A203600015B6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E7652C5E1E5A203600015B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +98,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E739F9C71E55E8E1002AEBF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7652C471E5A203600015B6C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,6 +158,7 @@
 			children = (
 				E726F5781E4F74FC0029FD6D /* ZombieConga */,
 				E739F9CB1E55E8E1002AEBF1 /* ActionsCatalog */,
+				E7652C4B1E5A203600015B6C /* AvailableFonts */,
 				E726F5771E4F74FC0029FD6D /* Products */,
 				DD1EB4BDE09865BAEC65D7A1 /* .gitignore */,
 			);
@@ -147,6 +169,7 @@
 			children = (
 				E726F5761E4F74FC0029FD6D /* ZombieConga.app */,
 				E739F9CA1E55E8E1002AEBF1 /* ActionsCatalog.app */,
+				E7652C4A1E5A203600015B6C /* AvailableFonts.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +220,20 @@
 			path = ActionsCatalog;
 			sourceTree = "<group>";
 		};
+		E7652C4B1E5A203600015B6C /* AvailableFonts */ = {
+			isa = PBXGroup;
+			children = (
+				E7652C4C1E5A203600015B6C /* AppDelegate.swift */,
+				E7652C521E5A203600015B6C /* GameScene.swift */,
+				E7652C541E5A203600015B6C /* GameViewController.swift */,
+				E7652C561E5A203600015B6C /* Main.storyboard */,
+				E7652C591E5A203600015B6C /* Assets.xcassets */,
+				E7652C5B1E5A203600015B6C /* LaunchScreen.storyboard */,
+				E7652C5E1E5A203600015B6C /* Info.plist */,
+			);
+			path = AvailableFonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,6 +271,23 @@
 			productReference = E739F9CA1E55E8E1002AEBF1 /* ActionsCatalog.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E7652C491E5A203600015B6C /* AvailableFonts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7652C611E5A203600015B6C /* Build configuration list for PBXNativeTarget "AvailableFonts" */;
+			buildPhases = (
+				E7652C461E5A203600015B6C /* Sources */,
+				E7652C471E5A203600015B6C /* Frameworks */,
+				E7652C481E5A203600015B6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AvailableFonts;
+			productName = AvailableFonts;
+			productReference = E7652C4A1E5A203600015B6C /* AvailableFonts.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -254,6 +308,11 @@
 						DevelopmentTeam = 5H9H3DSGAL;
 						ProvisioningStyle = Automatic;
 					};
+					E7652C491E5A203600015B6C = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5H9H3DSGAL;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = E726F5711E4F74FB0029FD6D /* Build configuration list for PBXProject "ZombieConga" */;
@@ -271,6 +330,7 @@
 			targets = (
 				E726F5751E4F74FB0029FD6D /* ZombieConga */,
 				E739F9C91E55E8E1002AEBF1 /* ActionsCatalog */,
+				E7652C491E5A203600015B6C /* AvailableFonts */,
 			);
 		};
 /* End PBXProject section */
@@ -298,6 +358,16 @@
 				E739F9D81E55E8E1002AEBF1 /* Main.storyboard in Resources */,
 				E739F9DA1E55E8E1002AEBF1 /* Assets.xcassets in Resources */,
 				E739F9DD1E55E8E1002AEBF1 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7652C481E5A203600015B6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7652C581E5A203600015B6C /* Main.storyboard in Resources */,
+				E7652C5A1E5A203600015B6C /* Assets.xcassets in Resources */,
+				E7652C5D1E5A203600015B6C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +406,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7652C461E5A203600015B6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7652C531E5A203600015B6C /* GameScene.swift in Sources */,
+				E7652C551E5A203600015B6C /* GameViewController.swift in Sources */,
+				E7652C4D1E5A203600015B6C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -367,6 +447,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				E739F9DC1E55E8E1002AEBF1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E7652C561E5A203600015B6C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7652C571E5A203600015B6C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E7652C5B1E5A203600015B6C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7652C5C1E5A203600015B6C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -519,6 +615,32 @@
 			};
 			name = Release;
 		};
+		E7652C5F1E5A203600015B6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5H9H3DSGAL;
+				INFOPLIST_FILE = AvailableFonts/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = www.qiaozhang.AvailableFonts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E7652C601E5A203600015B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5H9H3DSGAL;
+				INFOPLIST_FILE = AvailableFonts/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = www.qiaozhang.AvailableFonts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -545,6 +667,15 @@
 			buildConfigurations = (
 				E739F9E01E55E8E1002AEBF1 /* Debug */,
 				E739F9E11E55E8E1002AEBF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7652C611E5A203600015B6C /* Build configuration list for PBXNativeTarget "AvailableFonts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7652C5F1E5A203600015B6C /* Debug */,
+				E7652C601E5A203600015B6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
