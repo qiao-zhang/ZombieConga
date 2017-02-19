@@ -71,6 +71,9 @@ class GameSceneImp: SKScene, GameScene {
       "hitCat.wav", waitForCompletion: false)
   let enemySpriteCollisionSound: SKAction = SKAction.playSoundFileNamed(
       "hitCatLady.wav", waitForCompletion: false)
+  
+  // labels
+  let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
 
   override init(size: CGSize) {
     let maxWidthHeightRatio: CGFloat = 16.0 / 9.0
@@ -93,7 +96,7 @@ class GameSceneImp: SKScene, GameScene {
   override func didMove(to view: SKView) {
     // play BGM
     playBackgroundMusic(filename: "backgroundMusic.mp3")
-    
+
     // add background
     backgroundColor = SKColor.black
     for i in 0...1 {
@@ -111,7 +114,7 @@ class GameSceneImp: SKScene, GameScene {
     zombieSprite.zPosition = 100
     addChild(zombieSprite)
     
-    // spawn enemy sprites
+    // spawn enemy sprites repeatedly
     run(SKAction.repeatForever(SKAction.sequence([
       SKAction.run { self.spawnEnemySprite() },
       SKAction.wait(forDuration: 2.0)
@@ -121,8 +124,21 @@ class GameSceneImp: SKScene, GameScene {
       SKAction.wait(forDuration: 1.0)
     ])))
 
-    camera = cameraNode
+    // add camera
     cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+    camera = cameraNode 
+    
+    // add labels
+    livesLabel.text = "Lives: X"
+    livesLabel.fontColor = SKColor.black
+    livesLabel.fontSize = 100
+    livesLabel.zPosition = 100
+//    livesLabel.zPosition = 1500
+    livesLabel.horizontalAlignmentMode = .left
+    livesLabel.verticalAlignmentMode = .bottom
+//    livesLabel.position = CGPoint.zero
+    livesLabel.position = cameraRect.origin + CGPoint(x: 20, y: 20)
+    addChild(livesLabel)
   }
 
   override func update(_ currentTime: TimeInterval) {
@@ -265,6 +281,7 @@ class GameSceneImp: SKScene, GameScene {
         x: cameraRect.maxX + enemy.size.width/2,
         y: CGFloat.random(min: cameraRect.minY + enemy.size.height/2,
                           max: cameraRect.maxY - enemy.size.height/2))
+    enemy.zPosition = 50
     addChild(enemy)
     
     let actionMove = SKAction.moveBy(x: -cameraRect.width, y: 0, duration: 2.0)
@@ -412,6 +429,7 @@ class GameSceneImp: SKScene, GameScene {
     let cameraVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
     let amountToMove = cameraVelocity * CGFloat(dt)
     cameraNode.position += amountToMove
+    livesLabel.position += amountToMove
     
     enumerateChildNodes(withName: "background") { [weak self] node, _ in
       guard let strongSelf = self else { return }
