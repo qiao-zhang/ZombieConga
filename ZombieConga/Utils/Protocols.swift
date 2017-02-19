@@ -5,7 +5,7 @@
 
 import SpriteKit.SKScene
 
-protocol MyScene {
+protocol MyScene: class {
   var scene: SKScene { get }
 }
 
